@@ -1,6 +1,6 @@
 # DEPRECATED
 
-Use the [Ionic Cloud Client](https://github.com/driftyco/ionic-cloud).
+Use the [Ionic Cloud Client](https://github.com/ionic-team/ionic-cloud).
 
 * [Setup/Installation](http://docs.ionic.io/setup.html).
 * [Migration Guide](http://docs.ionic.io/migration.html) (from

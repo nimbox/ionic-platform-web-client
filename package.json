@@ -4,7 +4,7 @@
   "description": "Ionic platform web client",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/driftyco/ionic-platform-web-client.git"
+    "url": "git+https://github.com/ionic-team/ionic-platform-web-client.git"
   },
   "keywords": [
     "Ionic",
@@ -21,7 +21,7 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/driftyco/ionic-platform-web-client/issues"
+    "url": "https://github.com/ionic-team/ionic-platform-web-client/issues"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
@@ -137,7 +137,7 @@
       ]
     }
   },
-  "homepage": "https://github.com/driftyco/ionic-platform-web-client#readme",
+  "homepage": "https://github.com/ionic-team/ionic-platform-web-client#readme",
   "devDependencies": {
     "babel": "^5.8.21",
     "babelify": "^6.2.0",
