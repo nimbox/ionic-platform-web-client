@@ -84,9 +84,9 @@ export class Analytics {
   _enqueueEvent(collectionName, eventData) {
     var self = this;
     if (options.dryRun) {
-      self.logger.info('event recieved but not sent (dryRun active):');
-      self.logger.info(collectionName);
-      self.logger.info(eventData);
+      if (options.nimboxUsage && options.rootScope) {
+        options.rootScope.$broadcast('ionicAnalystics:queueEvent', { 'collectionName': collectionName, 'eventData': eventData });
+      }
       return;
     }
 
@@ -239,8 +239,6 @@ export class Analytics {
    * @return {Promise} The register promise
    */
   register(opts) {
-
-    var self = this;
     var deferred = new DeferredPromise();
 
     if (!this.hasValidSettings) {
@@ -255,20 +253,19 @@ export class Analytics {
       this.logger._silence = false;
     }
 
-    if (options.dryRun) {
-      this.logger.info('dryRun mode is active. Analytics will not send any events.');
+    if (options.dryRun && options.nimboxUsage) {
+      this.logger.info('nimboxUsage mode is active. Analytics will be sent to Nimbox.');
     }
 
-
-    this._requestAnalyticsKey().then(function(result) {
-      ANALYTICS_KEY = result.payload.write_key;
-      self.logger.info('successfully registered analytics key');
-      self.dispatchInterval = self.dispatchInterval;
-      deferred.resolve(true);
-    }, function(error) {
-      self._handleRegisterError(error, this);
-      deferred.reject(false);
-    });
+    // this._requestAnalyticsKey().then(function (result) {
+    //   ANALYTICS_KEY = result.payload.write_key;
+    //   self.logger.info('successfully registered analytics key');
+    //   self.dispatchInterval = self.dispatchInterval;
+    //   deferred.resolve(true);
+    // }, function (error) {
+    //   self._handleRegisterError(error, this);
+    //   deferred.reject(false);
+    // });
 
     return deferred.promise;
   }
@@ -329,9 +326,9 @@ export class Analytics {
       self._enqueueEvent(eventCollection, eventData);
     } else {
       if (options.dryRun) {
-        self.logger.info('dryRun active, will not send event');
-        self.logger.info(eventCollection);
-        self.logger.info(eventData);
+        if (options.nimboxUsage && options.rootScope) {
+          options.rootScope.$broadcast('ionicAnalystics:queueEvent', { 'collectionName': eventCollection, 'eventData': eventData });
+        }
       } else {
         self._postEvent(eventCollection, eventData);
       }
